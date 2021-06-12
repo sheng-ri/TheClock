@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        #time-clock div {
+            float: left;
+        }
+
+        #time-clock {
+            width: 300px;
+            height: 300px;
+            margin: auto 0;
+        }
+    </style>
+</head>
+<script>
+    $(document).ready(function() {
+        initSparate("-");
+        initUpdateTime();
+    })
+    function initSparate(style) {
+        for (let i = 1; i < 3; i++) {
+            var element = $("#Sparate-" + i);
+            element.text(style);
+        }
+    }
+
+    function initUpdateTime() {
+        var timeElement = {
+        	"hourEle":$("#hour"),
+        	"minuteEle":$("#minute"),
+        	"secondEle":$("#second")
+        }
+        window.test = timeElement;
+        updateTime(timeElement);
+        setInterval(updateTime,1000,timeElement);
+    }
+
+    function updateTime(timeElement) {
+        var date = new Date();
+        timeElement.hourEle.text(format(date.getHours()));
+        timeElement.minuteEle.text(format(date.getMinutes()));
+        timeElement.secondEle.text(format(date.getSeconds()));
+    }
+
+    function format(content) {
+        content = String(content);
+        if (content.length == 1) {
+            return "0" + content;
+        }
+        return content;
+    }
+</script>
+<body>
+    <div id="wrapped">
+        <div id="clock">新建文件夹.jpg</div>
+        <div id="time-clock">
+            <div id="hour" class="line"></div>
+            <div id="Sparate-1" class="line"></div>
+            <div id="minute" class="line"></div>
+            <div id="Sparate-2" class="line"></div>
+            <div id="second" class="line"></div>
+        </div>
+    </div>
+</body>
+</html>
